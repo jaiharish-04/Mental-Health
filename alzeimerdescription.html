@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alzheimer's Disease Description</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .header {
+        background-color: #4facfe;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header h1 {
+        margin: 0;
+        color: white;
+    }
+    .header button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .header button:hover {
+        background-color: #45a049;
+    }
+    .content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 120px); /* Adjust based on header height */
+    }
+    .description-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+    }
+    .description-container img {
+        width: 40%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
+    .description-container .description {
+        width: 40%;
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
+    .description-container .description h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    .upload-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .upload-container input[type="file"] {
+        display: none;
+    }
+    .upload-container label, .upload-container button, .submit-button {
+        background-color: #4facfe; /* Changed to match upload button */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+    .upload-container label:hover, .upload-container button:hover, .submit-button:hover {
+        background-color: #4facfe;
+    }
+</style>
+
+</head>
+<body>
+    <div class="header">
+        <h1>ALZHEIMER'S DISEASE DIAGNOSIS</h1>
+        <button class="logout-btn">Logout</button>
+    </div>
+    <div class="content">
+        <div class="description-container">
+            <img src="https://seniorsafetyadvice.com/wp-content/uploads/clock-face-4894696_640.jpg" alt="Alzheimer's Disease">
+            <div class="description">
+                <h2>Alzheimer's Disease</h2>
+                <p>Alzheimer's disease is the most common type of dementia. It is a progressive disease beginning with mild memory loss and possibly leading to loss of the ability to carry on a conversation and respond to the environment. Alzheimer's disease involves parts of the brain that control thought, memory, and language.</p>
+                <h3>Draw the given image and upload for further analysis</h3>
+                <!-- Add more description content here -->
+            </div>
+        </div>
+        <div class="upload-container">
+            <form action="/uploadimagealzeimer" method="post" enctype="multipart/form-data">
+                <input type="file" id="image-upload" name="image" accept="image/*">
+                <label for="image-upload">Upload Image</label>
+                <input type="submit" id='confirm' name="submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat about Mental Health</title>
+    <style>
+        /* Your CSS styles remain unchanged */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logout-btn,
+        .issues-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .logout-btn:hover,
+        .issues-btn:hover {
+            background-color: #d32f2f;
+        }
+        .task-bar {
+            background-color: #f2f2f2;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .task-bar button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .task-bar button:hover {
+            background-color: #45a049;
+        }
+        .content {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 150px); /* Adjust based on header and task bar heights */
+        }
+        .chat-container {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            width: 60%;
+            max-width: 600px;
+        }
+        .chat-container input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        .chat-container input[type="text"]:hover {
+            border-color: #4caf50;
+        }
+        .chat-container input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .chat-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .chat-container .response {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Chat about Mental Health</h1>
+        <h2>Welcome {{ user }}</h2>
+        <a href="http://127.0.0.1:5000/description" class="issues-btn">Check Motor Related Issues</a>
+        <button class="logout-btn">Logout</button>
+    </div>
+    <div class="task-bar">
+        <!-- Add any task bar elements here if needed -->
+    </div>
+    <div class="content">
+        <div class="chat-container">
+            <div id="chat-history"></div> <!-- Container for chat history -->
+            <form id="user-input-form" action="/home" method="POST">
+                <label for="user-input">Your Message:</label>
+                <input type="text" id="user-input" name="user-input" placeholder="Enter your message...">
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Custom JavaScript code -->
+    <script>
+        // Function to add user message to chat history
+        function addUserMessage(message) {
+            var chatHistory = document.getElementById("chat-history");
+            var userMessageElement = document.createElement("p");
+            userMessageElement.classList.add("user-message");
+            userMessageElement.textContent = "You: " + message;
+            chatHistory.appendChild(userMessageElement);
+        }
+
+        // Function to add model response to chat history
+        function addModelResponse(response) {
+            var chatHistory = document.getElementById("chat-history");
+            var modelResponseElement = document.createElement("p");
+            modelResponseElement.classList.add("model_response");
+            modelResponseElement.textContent = ": " + response;
+            chatHistory.appendChild(modelResponseElement);
+        }
+
+        // Function to handle user input submission
+        document.getElementById("user-input-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            var userInputValue = document.getElementById("user-input").value.trim(); // Store the user input
+            if (userInputValue !== "") {
+                addUserMessage(userInputValue);
+                // Send user input to Flask backend
+                sendUserInputToFlask(userInputValue); // Updated function call
+            }
+        });
+
+        // Function to send user input to Flask backend using AJAX
+        function sendUserInputToFlask(userInput) {
+            // AJAX request configuration
+            $.ajax({
+                type: "POST",
+                url: "/home", // URL of your Flask endpoint
+                data: { "user-input": userInput }, // Data to be sent to the server
+                success: function(response) {
+                    // Handle successful response from Flask
+                    handleModelResponse(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error("Error:", error);
+                }
+            });
+        }
+
+
+        // Function to simulate model response (replace with actual model interaction)
+        function simulateModelResponse(userInput) {
+            // Here you can replace this logic with actual interaction with your model
+            // For now, just displaying a dummy response
+            model_response = "{{ model_response }}";
+            addModelResponse(model_response);
+            // Clearing the input field moved inside this function
+            document.getElementById("user-input").value = ""; // Clear input field
+        }
+
+    </script>
+</body>
+
+</html>

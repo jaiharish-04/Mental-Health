@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            font-size: 0; /* Set font-size to 0 */
+        }
+
+        .left-column,
+        .right-column {
+            flex: 1;
+            font-size: initial; /* Reset font-size for child elements */
+        }
+
+        .left-column {
+            padding: 20px;
+            background-color: rgb(133, 162, 198); /* Background color */
+        }
+
+        .right-column {
+            padding: 10px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-column img {
+            width: 180%; /* Set the width to 50% of the container's width */
+            height: auto; /* Let the height adjust to maintain aspect ratio */
+            float: right; /* Float the image to the right */
+        }
+
+        .registration-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Adding transition for hover effect */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Change background color on hover */
+        }
+
+        .register-link {
+            text-align: center;
+        }
+
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <div class="registration-container">
+                <h2>Registration</h2>
+                <form action="/register" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" placeholder="Enter your age">
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" class="gender-select">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+
+                    <label for="profession">Profession:</label>
+                    <select id="profession" name="profession" class="gender-select">
+                        <option value="doctor">Doctor</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
+                        <option value="engineer">Engineer</option>
+                        <option value="artist">Artist</option>
+                        <!-- Add more options as needed -->
+                    </select>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your Password">
+
+                    <label for="con_password">Confirm Password:</label>
+                    <input type="password" id="con_password" name="con_password" placeholder="Re-Enter your Password">
+
+                    <input type="submit" value="Register">
+
+                    <div class="register-link">
+                        <p>Already have an account? <a href="http://127.0.0.1:5000/login">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="right-column">
+            <img  src="{{ url_for('static', filename='/reg_page.jpeg') }}">
+        </div>
+    </div>
+</body>
+</html>

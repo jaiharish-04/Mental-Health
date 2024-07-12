@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .disease-box {
+            width: 200px;
+            height: 200px;
+            background-color: #4facfe;
+            color: #fff;
+            text-align: center;
+            line-height: 200px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .disease-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        }
+        .blur-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            filter: blur(5px);
+            z-index: 999;
+            display: none;
+        }
+        .disease-info {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 80%;
+        }
+        .disease-info h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .disease-info p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .take-test-btn {
+            background-color: #4facfe;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .take-test-btn:hover {
+            background-color: #4fa3fe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="disease-box" id="alzheimers-box">ALZHEIMER'S DISEASE</div>
+        <div class="disease-box" id="parkinsons-box">PARKINSON'S DISEASE</div>
+    </div>
+
+    <div class="blur-effect"></div>
+
+    <div class="disease-info" id="alzheimers-info">
+        <h2>ALZHEIMER'S DISEASE</h2>
+        <p>Alzheimer's disease is the most common type of dementia. It is a progressive disease beginning with mild memory loss and possibly leading to loss of the ability to carry on a conversation and respond to the environment. Alzheimer's disease involves parts of the brain that control thought, memory, and language.</p>
+        <a href="http://127.0.0.1:5000/alzeimer" class="take-test-btn">Take Test</a>
+    </div>
+    <div class="disease-info" id="parkinsons-info">
+        <h2>PARKINSON'S DISEASE</h2>
+        <p>Parkinson's disease is a progressive disorder that affects the nervous system and the parts of the body controlled by the nerves. Symptoms start slowly. The first symptom may be a barely noticeable tremor in just one hand. Tremors are common, but the disorder may also cause stiffness or slowing of movement..</p>
+        <a href="http://127.0.0.1:5000/parkinsons" class="take-test-btn">Take Test</a>
+    </div>
+
+
+    <script>
+        const alzheimersBox = document.getElementById('alzheimers-box');
+        const parkinsonsBox = document.getElementById('parkinsons-box');
+
+        const alzheimersInfo = document.getElementById('alzheimers-info');
+        const parkinsonsInfo = document.getElementById('parkinsons-info');
+
+        const blurEffect = document.querySelector('.blur-effect');
+        const diseaseInfoContainers = document.querySelectorAll('.disease-info');
+
+        alzheimersBox.addEventListener('mouseenter', () => {
+            showDiseaseInfo(alzheimersInfo);
+        });
+        parkinsonsBox.addEventListener('mouseenter', () => {
+            showDiseaseInfo(parkinsonsInfo);
+        });
+
+
+        function showDiseaseInfo(infoElement) {
+            blurEffect.style.display = 'block';
+            diseaseInfoContainers.forEach(container => container.style.display = 'none');
+            infoElement.style.display = 'block';
+        }
+
+        // Closing the disease info when moving the cursor away from the box
+        diseaseInfoContainers.forEach(container => {
+            container.addEventListener('mouseleave', () => {
+                blurEffect.style.display = 'none';
+                container.style.display = 'none';
+            });
+        });
+
+        // Redirecting to another page when "Take Test" button is clicked
+        const takeTestButtons = document.querySelectorAll('.take-test-btn');
+        takeTestButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                window.location.href = '/take-test'; // Replace with the actual page URL
+            });
+        });
+    </script>
+</body>
+</html>
